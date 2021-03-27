@@ -62,6 +62,10 @@ clusters_centers=km.cluster_centers_
 
 
 #show the characteristics of each cluster
+cluster_1=np.count_nonzero(clusters==0)
+cluster_2=np.count_nonzero(clusters==1)
+c_data=np.concatenate((np.array(patient_info_mod),np.reshape(clusters,(len(clusters),1))),axis=1)
+
 width=0.4
 labels=['Released','Isolated','Female','Male','Inf-patient Contact']
 c=np.empty([idealClusters,len(labels)])
