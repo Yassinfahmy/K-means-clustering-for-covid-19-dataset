@@ -57,19 +57,21 @@ km              = KMeans(n_clusters=idealClusters, random_state=0).fit(df)
 clusters        =km.labels_
 clusters_centers=km.cluster_centers_
 
-#how do you want to validate the model?
-
-
 
 #show the characteristics of each cluster
-cluster_1=np.count_nonzero(clusters==0)
-cluster_2=np.count_nonzero(clusters==1)
+cluster_1_no=np.count_nonzero(clusters==0)
+cluster_2_no=np.count_nonzero(clusters==1)
 c_data=np.concatenate((np.array(patient_info_mod),np.reshape(clusters,(len(clusters),1))),axis=1)
 
 width=0.4
 labels=['Released','Isolated','Female','Male','Inf-patient Contact']
 c=np.empty([idealClusters,len(labels)])
+
+clust1=df.loc[clusters==0]
+clust2=df.loc[clusters==1]
+
 for i in range(idealClusters-1):
+    
     c[i]=[\
         sum(df.loc[clusters==i,'state_released']),\
         sum(df.loc[clusters==i,'state_isolated']),\
@@ -87,7 +89,131 @@ ax.set_ylabel('Counts')
 ax.set_xticks(x)
 ax.set_xticklabels(labels)
 ax.legend()
+plt.show()
+
+
+
+
+###########################################################  
+del labels
+labels=['Cluster 1' , 'Cluster 2']
+
+
+counts=[cluster_1_no,cluster_2_no]
+
+f, ax = plt.subplots()
+ax.pie(counts,labels=labels,autopct='%1.1f')
+ax.axis('equal')
+plt.title('Cluster Split')
+plt.show()
+
+
+
+
+    
+###########################################################  Males
+counts=[len(clust1.loc[(clust1.sex_male==1) & (clust1.state_released==1)]),len(clust2.loc[(clust2.sex_male==1) & (clust2.state_released==1)])    ]
+
+f, (ax1,ax2) = plt.subplots(1,2)
+ax1.pie(counts,labels=labels,autopct='%1.1f')
+ax1.axis('equal')
+ax1.set_title('Males Released')
+
+
+
+counts=[len(clust1.loc[(clust1.sex_male==1) & (clust1.state_released==0)]),len(clust2.loc[(clust2.sex_male==1) & (clust2.state_released==0)])    ]
+
+#f, ax = plt.subplots()
+ax2.pie(counts,autopct='%1.1f')
+ax2.axis('equal')
+ax2.set_title('Males Isolated')
+plt.legend()
 
 plt.show()
 
-#any other ideas?
+
+###########################################################   Females
+counts=[len(clust1.loc[(clust1.sex_female==1) & (clust1.state_released==1)]),len(clust2.loc[(clust2.sex_female==1) & (clust2.state_released==1)])    ]
+
+f, (ax1,ax2) = plt.subplots(1,2)
+ax1.pie(counts,labels=labels,autopct='%1.1f')
+ax1.axis('equal')
+ax1.set_title('Females Released')
+
+
+
+counts=[len(clust1.loc[(clust1.sex_female==1) & (clust1.state_released==0)]),len(clust2.loc[(clust2.sex_female==1) & (clust2.state_released==0)])    ]
+
+#f, ax = plt.subplots()
+ax2.pie(counts,autopct='%1.1f')
+ax2.axis('equal')
+ax2.set_title('Females Isolated')
+plt.legend()
+
+plt.show()
+
+
+
+###########################################################   Young
+
+counts=[len(clust1.loc[((clust1.age_0s==1) | (clust1.age_10s==1) | (clust1.age_20s==1) | (clust1.age_30s==1) | (clust1.age_40s==1) | (clust1.age_50s==1))\
+                       & (clust1.state_released==1)]),\
+        len(clust2.loc[((clust2.age_0s==1) | (clust2.age_10s==1) | (clust2.age_20s==1) | (clust2.age_30s==1) | (clust2.age_40s==1) | (clust2.age_50s==1))\
+                       & (clust2.state_released==1)])    ]
+
+    
+    
+ 
+
+f, (ax1,ax2) = plt.subplots(1,2)
+ax1.pie(counts,autopct='%1.1f')
+ax1.axis('equal')
+ax1.set_title('Under 60s Released')
+
+
+
+counts=[len(clust1.loc[((clust1.age_0s==1) | (clust1.age_10s==1) | (clust1.age_20s==1) | (clust1.age_30s==1) | (clust1.age_40s==1) | (clust1.age_50s==1))\
+                       & (clust1.state_released==0)]),\
+        len(clust2.loc[((clust2.age_0s==1) | (clust2.age_10s==1) | (clust2.age_20s==1) | (clust2.age_30s==1) | (clust2.age_40s==1) | (clust2.age_50s==1))\
+                       & (clust2.state_released==0)])    ]
+
+
+ax2.pie(counts,labels=labels,autopct='%1.1f')
+ax2.axis('equal')
+ax2.set_title('Under 60s Isolated')
+plt.legend()
+plt.show()
+
+
+
+
+    
+###########################################################  Old
+
+counts=[len(clust1.loc[((clust1.age_60s==1) | (clust1.age_70s==1) | (clust1.age_80s==1) | (clust1.age_90s==1) | (clust1.age_100s==1))\
+                       & (clust1.state_released==1)]),\
+        len(clust2.loc[((clust2.age_60s==1) | (clust2.age_70s==1) | (clust2.age_80s==1) | (clust2.age_90s==1) | (clust2.age_100s==1))\
+                       & (clust2.state_released==1)])    ]
+    
+    
+f, (ax1,ax2) = plt.subplots(1,2)
+ax1.pie(counts,autopct='%1.1f')
+ax1.axis('equal')
+ax1.set_title('Over 60s Released')
+
+
+
+counts=[len(clust1.loc[((clust1.age_60s==1) | (clust1.age_70s==1) | (clust1.age_80s==1) | (clust1.age_90s==1) | (clust1.age_100s==1))\
+                       & (clust1.state_released==0)]),\
+        len(clust2.loc[((clust2.age_60s==1) | (clust2.age_70s==1) | (clust2.age_80s==1) | (clust2.age_90s==1) | (clust2.age_100s==1))\
+                       & (clust2.state_released==0)])    ]
+
+
+ax2.pie(counts,autopct='%1.1f')
+ax2.axis('equal')
+ax2.set_title('Over 60s Isolated')
+plt.legend(labels)
+plt.show()
+
+
+
