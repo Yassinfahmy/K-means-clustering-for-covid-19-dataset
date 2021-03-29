@@ -70,15 +70,14 @@ c=np.empty([idealClusters,len(labels)])
 clust1=df.loc[clusters==0]
 clust2=df.loc[clusters==1]
 
-for i in range(idealClusters-1):
-    
-    c[i]=[\
-        sum(df.loc[clusters==i,'state_released']),\
-        sum(df.loc[clusters==i,'state_isolated']),\
-        sum(df.loc[clusters==i,'sex_female']),\
-        sum(df.loc[clusters==i,'sex_male']),\
-        sum(df.loc[clusters==i,'infection_case_contact with patient'])\
-            ]
+for i in range(idealClusters):
+    c[i]=[
+    sum(df.loc[clusters==i,'state_released']),\
+    sum(df.loc[clusters==i,'state_isolated']),\
+    sum(df.loc[clusters==i,'sex_female']),\
+    sum(df.loc[clusters==i,'sex_male']),\
+    sum(df.loc[clusters==i,'infection_case_contact with patient'])\
+    ]
 
 x=np.arange(len(labels))
 f, ax =plt.subplots()
@@ -104,7 +103,7 @@ counts=[cluster_1_no,cluster_2_no]
 f, ax = plt.subplots()
 ax.pie(counts,labels=labels,autopct='%1.1f')
 ax.axis('equal')
-plt.title('Cluster Split')
+plt.title('Data Split')
 plt.show()
 
 
@@ -115,7 +114,7 @@ plt.show()
 counts=[len(clust1.loc[(clust1.sex_male==1) & (clust1.state_released==1)]),len(clust2.loc[(clust2.sex_male==1) & (clust2.state_released==1)])    ]
 
 f, (ax1,ax2) = plt.subplots(1,2)
-ax1.pie(counts,labels=labels,autopct='%1.1f')
+ax1.pie(counts,autopct='%1.1f')
 ax1.axis('equal')
 ax1.set_title('Males Released')
 
@@ -127,7 +126,7 @@ counts=[len(clust1.loc[(clust1.sex_male==1) & (clust1.state_released==0)]),len(c
 ax2.pie(counts,autopct='%1.1f')
 ax2.axis('equal')
 ax2.set_title('Males Isolated')
-plt.legend()
+plt.legend(labels,loc="upper left")
 
 plt.show()
 
@@ -136,7 +135,7 @@ plt.show()
 counts=[len(clust1.loc[(clust1.sex_female==1) & (clust1.state_released==1)]),len(clust2.loc[(clust2.sex_female==1) & (clust2.state_released==1)])    ]
 
 f, (ax1,ax2) = plt.subplots(1,2)
-ax1.pie(counts,labels=labels,autopct='%1.1f')
+ax1.pie(counts,autopct='%1.1f')
 ax1.axis('equal')
 ax1.set_title('Females Released')
 
@@ -148,7 +147,7 @@ counts=[len(clust1.loc[(clust1.sex_female==1) & (clust1.state_released==0)]),len
 ax2.pie(counts,autopct='%1.1f')
 ax2.axis('equal')
 ax2.set_title('Females Isolated')
-plt.legend()
+plt.legend(labels,loc="upper left")
 
 plt.show()
 
@@ -178,10 +177,10 @@ counts=[len(clust1.loc[((clust1.age_0s==1) | (clust1.age_10s==1) | (clust1.age_2
                        & (clust2.state_released==0)])    ]
 
 
-ax2.pie(counts,labels=labels,autopct='%1.1f')
+ax2.pie(counts,autopct='%1.1f')
 ax2.axis('equal')
 ax2.set_title('Under 60s Isolated')
-plt.legend()
+plt.legend(labels,loc="upper left")
 plt.show()
 
 
