@@ -72,6 +72,9 @@ clust2=df.loc[clusters==1]
 
 for i in range(idealClusters):
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 64b5c40997d31fa36c226f1fc387ba0530cf6fb9
     c[i]=[
     sum(df.loc[clusters==i,'state_released']),\
     sum(df.loc[clusters==i,'state_isolated']),\
@@ -79,6 +82,9 @@ for i in range(idealClusters):
     sum(df.loc[clusters==i,'sex_male']),\
     sum(df.loc[clusters==i,'infection_case_contact with patient'])\
     ]
+<<<<<<< HEAD
+
+=======
 =======
     
     c[i]=[\
@@ -89,6 +95,7 @@ for i in range(idealClusters):
         sum(df.loc[clusters==i,'infection_case_contact with patient'])\
             ]
 >>>>>>> 627fca8eb1aed530300caeeae6d4093cd98583fd
+>>>>>>> 64b5c40997d31fa36c226f1fc387ba0530cf6fb9
 
 x=np.arange(len(labels))
 f, ax =plt.subplots()
