@@ -70,7 +70,7 @@ c=np.empty([idealClusters,len(labels)])
 clust1=df.loc[clusters==0]
 clust2=df.loc[clusters==1]
 
-for i in range(idealClusters-1):
+for i in range(idealClusters):
     
     c[i]=[\
         sum(df.loc[clusters==i,'state_released']),\
@@ -91,7 +91,42 @@ ax.set_xticklabels(labels)
 ax.legend()
 plt.show()
 
+del labels
+del f 
+del ax
+labels=['Female','Male','Under 60', 'Over 60', 'Country China', 'Other Country']
+x=np.arange(len(labels))
+demos=np.empty([idealClusters,len(labels)])
 
+demos1=np.array([\
+        len(clust1.loc[clust1.sex_female==1]),\
+        len(clust1.loc[clust1.sex_male==1]),\
+        len(clust1.loc[((clust1.age_0s==1) | (clust1.age_10s==1) | (clust1.age_20s==1) | (clust1.age_30s==1) | (clust1.age_40s==1) | (clust1.age_50s==1))]),\
+        len(clust1.loc[((clust1.age_60s==1) | (clust1.age_70s==1) | (clust1.age_80s==1) | (clust1.age_90s==1) | (clust1.age_100s==1))]),\
+        len(clust1.loc[clust1.country_China==1]),\
+        len(clust1.loc[clust1.country_China==0])\
+        ])
+
+demos2=np.array([\
+        len(clust2.loc[clust2.sex_female==1]),\
+        len(clust2.loc[clust2.sex_male==1]),\
+        len(clust2.loc[((clust2.age_0s==1) | (clust2.age_10s==1) | (clust2.age_20s==1) | (clust2.age_30s==1) | (clust2.age_40s==1) | (clust2.age_50s==1))]),\
+        len(clust2.loc[((clust2.age_60s==1) | (clust2.age_70s==1) | (clust2.age_80s==1) | (clust2.age_90s==1) | (clust2.age_100s==1))]),\
+        len(clust2.loc[clust2.country_China==1]),\
+        len(clust2.loc[clust2.country_China==0])\
+        ])
+    
+    
+f, ax =plt.subplots()
+ax.bar(x - width/2,demos1,width,label='Cluster 1')
+ax.bar(x + width/2,demos2,width,label='Cluster 2')
+
+ax.set_ylabel('Counts')
+ax.set_xticks(x)
+ax.set_xticklabels(labels)
+ax.legend()
+plt.title('Cluster Demographics')
+plt.show()
 
 
 ###########################################################  
