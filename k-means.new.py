@@ -274,4 +274,8 @@ plt.legend(labels)
 plt.show()
 
 
-
+# Different kmeans clustering runs were computed with different numbers of clusters. 
+# For each iteration, the inertia and silhouette coefficient of the model were calculated as well. 
+# After running models with cluster numbers ranging from 2 to 14, the model with the highest silhouette coefficient was chosen as the ideal model.
+# Our clustering algorithm seemed to separate patients into released and isolated groups. This split persisted thorughout age and gender. 
+# Age, gender, and country of origin demographic information is presented for each cluster as well.
