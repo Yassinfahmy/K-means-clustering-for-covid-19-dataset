@@ -27,6 +27,13 @@ number of clusters to be used with a given dataset: the sum of squared distance 
 cluster center and the Silhouette score. The sum of squared distance is used with the elbow method, however at times
 were the elbow is not apparent like in our model here, the Silhouette score can be used to identify the ideal number
 of clusters for the given dataset.
+
+Summary and interpretation of evaluation results:
+    Different kmeans clustering runs were computed with different numbers of clusters. 
+For each iteration, the inertia and silhouette coefficient of the model were calculated as well. 
+After running models with cluster numbers ranging from 2 to 14, the model with the highest silhouette coefficient was chosen as the ideal model.
+Our clustering algorithm seemed to separate patients into released and isolated groups. This split persisted thorughout age and gender as well.
+Age, gender, and country of origin demographic information is presented for each cluster as well.
 """
 
 
@@ -274,8 +281,4 @@ plt.legend(labels)
 plt.show()
 
 
-# Different kmeans clustering runs were computed with different numbers of clusters. 
-# For each iteration, the inertia and silhouette coefficient of the model were calculated as well. 
-# After running models with cluster numbers ranging from 2 to 14, the model with the highest silhouette coefficient was chosen as the ideal model.
-# Our clustering algorithm seemed to separate patients into released and isolated groups. This split persisted thorughout age and gender. 
-# Age, gender, and country of origin demographic information is presented for each cluster as well.
+
