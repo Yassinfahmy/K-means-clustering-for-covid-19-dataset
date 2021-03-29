@@ -4,18 +4,41 @@ Created on Thu Mar 25 20:57:19 2021
 
 @author: Yassin Fahmy and Gianna Jordan
 """
+"""
+Description of the problem:
+    The aim of this study is to identify wether age, sex, location, and mode of transmission could affect
+The outcome for patients diagnosed with covid-19 reflected in the dataset as the state of the patient.
+In this model we used the covid-19 dataset from South Korea. this data is based on reports from the 
+Korean Center for Disease Control and prevention available publicly on Kaggle. The dataset is 
+composed of over 5000 instances each with 14 features, We eliminated redundant features, our model
+had 7 features: sex, age, country, province, city, infection case and the state of the patient.
+We eliminated patients with missing data to end up with 2901 instances each representing a patients'
+associated data.
+
+Brief reflection of the learnings from this week:
+    In this week's lab we became familiar with the k-means clustering algorithm. We were able to understand the 
+theoretical framework behind k-means and how it can be used as an unsupervised learning algorithm capable of
+separating a dataset into clusters based on the similarities found between the data instances. K-means clustering
+uses a distance measure to separate the instances according to their proximity to random centroids that correspond 
+to the number of clusters we set. Each instance is assigned a cluster based on it's spatial location and the centroid
+locations are updated to reflect the new assignment. This process is repeated until no further change is seen the 
+assignment of the instances of the dataset. Moreover, this week we learned at least two ways to determine the ideal
+number of clusters to be used with a given dataset: the sum of squared distance of the samples to their closest 
+cluster center and the Silhouette score. The sum of squared distance is used with the elbow method, however at times
+were the elbow is not apparent like in our model here, the Silhouette score can be used to identify the ideal number
+of clusters for the given dataset.
+"""
+
+
 import pandas as pd
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
 import numpy as np
 import matplotlib.pyplot as plt
 
-# case           =pd.read_csv('Case.csv')
+
 patient_info   =pd.read_csv('PatientInfo.csv')
-# time           =pd.read_csv('Time.csv')
-# time_age       =pd.read_csv('TimeAge.csv')
-# time_gender    =pd.read_csv('TimeGender.csv')
-# time_provinance=pd.read_csv('TimeProvince.csv')
+
 
 #preprocessing
 
