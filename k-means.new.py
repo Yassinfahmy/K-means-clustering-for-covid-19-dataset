@@ -43,8 +43,8 @@ from sklearn.metrics import silhouette_score
 import numpy as np
 import matplotlib.pyplot as plt
 
-
-patient_info   =pd.read_csv('PatientInfo.csv')
+url='https://raw.githubusercontent.com/Yassinfahmy/K-means-clustering-for-covid-19-dataset/main/PatientInfo.csv'
+patient_info   =pd.read_csv(url)
 
 
 #preprocessing
